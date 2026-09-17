@@ -194,7 +194,32 @@
             margin-top: 1rem;
             flex-wrap: wrap;
         }
+/* --- ABOUT SECTION LAYOUT --- */
+        .about-wrapper {
+            display: flex;
+            flex-direction: column-reverse; /* Stacks text under photo on phones */
+            align-items: center;
+            gap: 3rem;
+        }
 
+        @media (min-width: 768px) {
+            .about-wrapper {
+                flex-direction: row; /* Places them side-by-side on computers */
+                justify-content: space-between;
+            }
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%; /* Makes the photo a perfect circle */
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
         /* --- ANIMATION STYLES --- */
         .fade-in-section {
             opacity: 0;
@@ -234,10 +259,17 @@
     <div class="container">
         
         <!-- Header / About Me -->
-        <header id="about" class="fade-in-section">
-            <h1>Haotian Fang</h1>
-            <p class="subtitle">Mechatronics Engineering | University of Waterloo</p>
-            <p>Hi! I'm Haotian, a Mechatronics Engineering student with a passion for robotics. My current interest is in mechanical design, particularly in autonomous systems.</p>
+        <header id="about" class="fade-in-section about-wrapper">
+            <div class="about-text">
+                <h1>Haotian Fang</h1>
+                <p class="subtitle">Mechatronics Engineering | University of Waterloo</p>
+                <p>Hi! I'm Haotian, a Mechatronics Engineering student with a passion for robotics. My current interest is in mechanical design, particularly in autonomous systems.</p>
+            </div>
+            
+            <div class="about-image">
+                <!-- Change 'your-photo.jpg' to the exact name of the file you uploaded to GitHub -->
+                <img src="profile_pic.png" alt="Haotian Fang Profile Photo">
+            </div>
         </header>
 
         <br><br>
