@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haotian Fang | Mechatronics Engineering</title>
+    <!-- Google Fonts for typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Minimalist, subtle feminine color palette & reset */
+        :root {
+            --bg-color: #FDFBFA; /* Soft pearl/ivory off-white */
+            --text-main: #4A4A4A; /* Charcoal gray, softer than black */
+            --text-light: #7A7A7A;
+            --accent-color: #D4B8B1; /* Dusty rose / soft blush */
+            --accent-hover: #C2A39B;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Enables smooth scrolling for the menu */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden; /* Prevents horizontal scroll during animations */
+        }
+
+        /* --- NAVIGATION MENU --- */
+        .navbar {
+            position: sticky;
+            top: 0;
+            background-color: rgba(253, 251, 250, 0.92); /* Matches background but slightly transparent */
+            backdrop-filter: blur(8px); /* Blurs the content scrolling behind the menu */
+            z-index: 1000;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid #f0eaea;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-main);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Layout & Spacing */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        section, header {
+            margin-bottom: 5rem;
+            scroll-margin-top: 80px; /* Prevents the sticky menu from covering section titles when jumping */
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            color: #2C2C2C;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #EAEAEA;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-family: var(--font-body);
+            color: var(--accent-color);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 2rem;
+        }
+
+        .date {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-style: italic;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            list-style-type: none;
+            margin-left: 0;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        ul li::before {
+            content: "•";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-size: 1.2rem;
+        }
+
+        /* Buttons & Links */
+        a.text-link {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a.text-link:hover {
+            color: var(--accent-hover);
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.6rem 1.5rem;
+            background-color: var(--accent-color);
+            color: #fff;
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+            color: #fff;
+        }
+
+        /* Specific Component Styles */
+        .experience-item, .project-item {
+            margin-bottom: 3rem;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* --- ANIMATION STYLES --- */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.75rem; }
+            .container { padding: 2rem 1.5rem; }
+            .nav-links { gap: 1rem; flex-wrap: wrap; }
+            .nav-links a { font-size: 0.75rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Menu -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#awards">Awards</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <!-- Header / About Me -->
+        <header id="about" class="fade-in-section">
+            <h1>Haotian Fang</h1>
+            <p class="subtitle">Mechatronics Engineering | University of Waterloo</p>
+            <p>Hi, I'm Haotian. I'm a Mechatronics Engineering student driven by a deep-rooted passion for designing, building, and iterating. My journey into engineering has always been hands-on—from conceptualizing autonomous systems to spending countless hours in the workshop refining competition robots. I thrive in the space where hardware meets logic, always looking for systematic approaches to troubleshoot complex physical problems. Whether I am analyzing match strategies, fine-tuning mechanisms, or coaching the next generation of roboticists, I am dedicated to building solutions that bridge the gap between theoretical math and real-world application.</p>
+        </header>
+
+        <br><br>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="fade-in-section">Featured Projects</h2>
+            
+            <div class="project-item fade-in-section">
+                <h3>Optimizing Public Address Systems: The Effect of Circuit Resistance on Sound Intensity</h3>
+                <span class="date">Independent Research | October 2024 – January 2025</span>
+                <p><strong>The Context:</strong> After noticing stark inconsistencies in the volume and clarity of Public Address (PA) systems across various schools in Calgary, I set out to investigate how to better regulate sound output. Ensuring these systems remain within safe human hearing thresholds (under 70 decibels) is critical for student and staff safety.</p>
+                <p><strong>The Investigation:</strong> To test a plausible mitigation method, I designed and executed a 5x5 laboratory trial exploring the addition of resistors into speaker circuit loops. This paper analyzes the direct relationship between circuit resistance and speaker sound intensity, proposing practical applications for safer, more consistent audible communication.</p>
+                <a href="#" class="btn">Read Full Research Paper (PDF)</a>
+            </div>
+
+            <div class="project-item fade-in-section">
+                <h3>Autonomous Arduino Robot</h3>
+                <span class="date">Workshop Showcase | July 2025</span>
+                <p>Constructed an autonomous Arduino robot utilizing ultrasonic sensors. Navigated dynamic mazes and moving obstacles with high precision, securing the top prize in the internal workshop showcase for accuracy and precision.</p>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <h2 class="fade-in-section">Experience & Leadership</h2>
+            
+            <div class="experience-item fade-in-section">
+                <h3>VEX Robotics Competitor</h3>
+                <span class="date">September 2023 – May 2026</span>
+                <ul>
+                    <li>Designed and built robots ready for competition, using iterative testing to troubleshoot mechanical and systemic problems.</li>
+                    <li>Developed advanced competition strategies through rigorous match analysis and international exposure.</li>
+                    <li>Recognized with multiple honors including the VEX Robotics Design Award, Build Award, and Provincial Judges Award.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item fade-in-section">
+                <h3>Robotics Club Co-President and Coach</h3>
+                <span class="date">September 2024 – May 2026</span>
+                <ul>
+                    <li>Directed activities and organized competition teams for a 30-member high school robotics club.</li>
+                    <li>Coached junior teams, establishing engineering fundamentals and nurturing a passion for robotics.</li>
+                    <li>Fostered a systematic approach to the design, build, and test lifecycle to resolve engineering challenges.</li>
+                </ul>
+            </div>
+
+            <div class="experience-item fade-in-section">
+                <h3>Mathematics Club Executive Member</h3>
+                <span class="date">May 2025 – June 2026</span>
+                <ul>
+                    <li>Hosted weekly interactive meetings, guiding members through advanced probability concepts.</li>
+                    <li>Taught students to view mathematics through a creative lens, moving beyond the standard curriculum to explore topics such as continuous random variables, probability density functions, and expected values.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Awards Section -->
+        <section id="awards" class="fade-in-section">
+            <h2>Awards & Honours</h2>
+            <ul>
+                <li>VEX Robotics Build Award (April 2026)</li>
+                <li>VEX Robotics Design Award (September 2025)</li>
+                <li>VEX Robotics Provincial Judges Award (February 2025)</li>
+                <li>Pascal Contest National Honour Roll (April 2023)</li>
+            </ul>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="fade-in-section">
+            <h2>Get in Touch</h2>
+            <p>I am always open to discussing robotics, mechatronics, and new engineering challenges.</p>
+            <div class="contact-links">
+                <a href="mailto:h57fang@uwaterloo.ca" class="text-link">h57fang@uwaterloo.ca</a>
+                <a href="tel:5878902735" class="text-link">587-890-2735</a>
+                <a href="https://linkedin.com/in/haotianf" target="_blank" class="text-link">LinkedIn</a>
+                <a href="https://github.com/haotian1717" target="_blank" class="text-link">GitHub</a>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- --- ANIMATION SCRIPT --- -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Select all elements with the class 'fade-in-section'
+            const elements = document.querySelectorAll('.fade-in-section');
+
+            // Configure the Intersection Observer
+            const observerOptions = {
+                root: null, // use the viewport
+                rootMargin: '0px',
+                threshold: 0.15 // trigger when 15% of the element is visible
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    // If the element is in view, add the 'is-visible' class
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        // Optional: stop observing once it has faded in
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            // Tell the observer to watch each element
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
